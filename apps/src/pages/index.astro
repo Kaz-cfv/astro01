@@ -2,23 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/NewsCard.astro';
 
-import { getBlogs } from "../assets/js/script";
-const response = await getBlogs({ fields: ["id", "title", "thumbnail", "category", "createdAt", "updatedAt"] });
+// import { getBlogs } from "../assets/js/script";
+// const response = await getBlogs({ fields: ["id", "title", "thumbnail", "category", "createdAt", "updatedAt"] });
 
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+// import dayjs from 'dayjs';
+// import utc from 'dayjs/plugin/utc';
+// import timezone from 'dayjs/plugin/timezone';
 // import _blogId_ from './news/[blogId].astro';
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
+// dayjs.extend(utc);
+// dayjs.extend(timezone);
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<h2 class="news__ttl">News</h2>
 		<ul class="news__list">
-			{
+			<!-- {
 				response.contents.map((content: any) => (
 					<Card
 						href={"/news/" + content.id}
@@ -29,7 +29,7 @@ dayjs.extend(timezone);
 						updatedAt={dayjs.utc(content.updatedAt).tz('Asia/Tokyo').format('YYYY.MM.DD')}
 					/>
 				))
-			}
+			} -->
 		</ul>
 	</main>
 </Layout>
