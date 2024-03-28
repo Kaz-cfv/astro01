@@ -1,23 +1,22 @@
 ---
 interface Props {
-	title: string;
-	href: string;
-	thumb: string;
-	category: string;
-	createdAt: string;
-	updatedAt: string;
+	href: string
+	thumbnail: string
+	title: string
+	createdAt: string
+	updatedAt: string
 }
 
-const { href, title, thumb, category, createdAt, updatedAt } = Astro.props;
+const { href, thumbnail, title, createdAt, updatedAt } = Astro.props;
 ---
 
 <li class="newsCard">
 	<a href={href}>
-		<figure class="newsCard__thumb"><img src={thumb} alt=""></figure>
+		<figure class="newsCard__thumb"><img src={thumbnail} alt=""></figure>
 		<h3 class="newsCard__cap">{title}</h3>
 		<span class="newsCard__date">更新日：{updatedAt}</span>
 		<span class="newsCard__date">作成日：{createdAt}</span>
-		<span class="newsCard__cat">#{category}</span>
+		<!-- <span class="newsCard__cat">#{category}</span> -->
 	</a>
 </li>
 

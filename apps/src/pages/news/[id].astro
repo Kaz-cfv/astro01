@@ -1,0 +1,98 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+import { newtClient} from "../../assets/js/script";
+import type { Article } from "../../assets/js/script";
+
+export const getStaticPaths = async () => {
+  const { items: articles } = await newtClient.getContents<Article>({
+    appUid: 'testcms',
+    modelUid: 'news',
+    query: {
+        select: ['_id', 'thumbnail', 'title', 'content', '_sys'],
+    },
+  })
+  return articles.map((article) => ({
+    params: { id: article._id },
+    props: { article },
+  }))
+}
+
+const { article } = Astro.props;
+
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+---
+
+<Layout title="">
+	<article>
+		<figure class="thumb"><img src={article.thumbnail.src} alt=""></figure>
+		<h1 class="title">{article.title}</h1>
+		<span class="date">作成日：{dayjs.utc(article._sys.createdAt).tz('Asia/Tokyo').format('YYYY.MM.DD')}</span>
+		<span class="date">更新日：{dayjs.utc(article._sys.updatedAt).tz('Asia/Tokyo').format('YYYY.MM.DD')}</span>
+		<!-- <span class="category">カテゴリ：{blog.category}</span> -->
+		<div class="content" set:html={article.content} />
+		<a href="/news" class="btnBack">一覧に戻る</a>
+	</article>
+</Layout>
+
+<style lang="scss">
+	.title {
+		position: relative;
+		margin-top: 40px;
+		padding-left: 18px;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 10px;
+			height: 100%;
+			background-color: #4169e1;
+			content: "";
+		}
+	}
+
+	.date {
+		font-size: 14px;
+
+		& + & {
+			margin-left: 20px;
+		}
+	}
+
+	.category {
+		margin-top: 5px;
+		display: block;
+		font-size: 14px;
+	}
+
+	.content {
+		font-size: 16px;
+		line-height: 32px;
+	}
+
+	.btnBack {
+		display: block;
+		width: 150px;
+		margin: auto;
+		padding: 10px;
+		border-radius: 24px;
+		background-color: #4169e1;
+		box-shadow: 4px 4px 8px rgba(#000, .3);
+		color: #fff;
+		font-size: 16px;
+		letter-spacing: 1px;
+		text-align: center;
+		transition: all .3s ease;
+
+		&:hover {
+			transform: translate(0, 4px);
+			box-shadow: none;
+		}
+	}
+</style>
