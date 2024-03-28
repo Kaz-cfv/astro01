@@ -1,7 +1,11 @@
 {
   "name": "apps",
+  "version": "3.0.0",
+  "description": "CREBAR FLAVOR. is project for develop",
+  "main": "index.js",
+  "author": "CREBAR FLAVOR.",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,6 +14,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.5.10"
+    "astro": "^4.5.10",
+    "microcms-js-sdk": "^3.1.0"
+  },
+  "devDependencies": {
+    "dayjs": "^1.11.10",
+    "sass": "^1.72.0",
+    "swiper": "^11.0.7"
+  },
+  "volta": {
+    "node": "18.19.0",
+    "yarn": "1.22.17"
   }
 }

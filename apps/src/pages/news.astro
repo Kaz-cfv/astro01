@@ -8,13 +8,12 @@ const response = await getBlogs({ fields: ["id", "title", "thumbnail", "category
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-// import _blogId_ from './news/[blogId].astro';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Astro">
 	<main>
 		<h2 class="news__ttl">News</h2>
 		<ul class="news__list">

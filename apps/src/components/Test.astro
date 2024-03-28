@@ -1,0 +1,15 @@
+---
+const { title = 'Hello World!' } = Astro.props;
+---
+
+<div class="hoge">
+	<h1 class="hoge__title">{title}</h1>
+</div>
+
+<style lang="scss">
+	.hoge {
+		&__title {
+			color: brown;
+		}
+	}
+</style>
