@@ -1,23 +1,43 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// import Card from '../components/NewsCard.astro';
+import Card from '../components/NewsCard.astro';
 
-// import { getBlogs } from "../assets/js/script";
-// const response = await getBlogs({ fields: ["id", "title", "thumbnail", "category", "createdAt", "updatedAt"] });
+import { newtClient} from "../assets/js/script";
+import type { Article } from "../assets/js/script";
 
-// import dayjs from 'dayjs';
-// import utc from 'dayjs/plugin/utc';
-// import timezone from 'dayjs/plugin/timezone';
-// import _blogId_ from './news/[blogId].astro';
+const { items: articles } = await newtClient.getContents<Article>({
+  appUid: 'testcms',
+  modelUid: 'news',
+  query: {
+    select: ['_id', 'thumbnail', 'title', '_sys'],
+  },
+});
 
-// dayjs.extend(utc);
-// dayjs.extend(timezone);
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<h2 class="news__ttl">News</h2>
 		<ul class="news__list">
+			{
+				articles.map((article) => {
+					return (
+						<Card
+							href={"/news/" + article._id}
+							thumbnail={article.thumbnail.src}
+							title={article.title}
+							createdAt={dayjs.utc(article._sys.createdAt).tz('Asia/Tokyo').format('YYYY.MM.DD')}
+							updatedAt={dayjs.utc(article._sys.updatedAt).tz('Asia/Tokyo').format('YYYY.MM.DD')}
+						/>
+					)
+				})
+			}
 		</ul>
 	</main>
 </Layout>
