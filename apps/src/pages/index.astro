@@ -1,17 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/NewsCard.astro';
+// import Card from '../components/NewsCard.astro';
 
-import { getBlogs } from "../assets/js/script";
-const response = await getBlogs({ fields: ["id", "title", "thumbnail", "category", "createdAt", "updatedAt"] });
+// import { getBlogs } from "../assets/js/script";
+// const response = await getBlogs({ fields: ["id", "title", "thumbnail", "category", "createdAt", "updatedAt"] });
 
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-import _blogId_ from './news/[blogId].astro';
+// import dayjs from 'dayjs';
+// import utc from 'dayjs/plugin/utc';
+// import timezone from 'dayjs/plugin/timezone';
+// import _blogId_ from './news/[blogId].astro';
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
+// dayjs.extend(utc);
+// dayjs.extend(timezone);
 ---
 
 <Layout title="Welcome to Astro.">
