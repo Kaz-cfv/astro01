@@ -18,18 +18,6 @@ dayjs.extend(timezone);
 	<main>
 		<h2 class="news__ttl">News</h2>
 		<ul class="news__list">
-			{
-				response.contents.map((content: any) => (
-					<Card
-						href={"/news/" + content.id}
-						title={content.title}
-						thumb={content.thumbnail.url}
-						category={content.category}
-						createdAt={dayjs.utc(content.createdAt).tz('Asia/Tokyo').format('YYYY.MM.DD')}
-						updatedAt={dayjs.utc(content.updatedAt).tz('Asia/Tokyo').format('YYYY.MM.DD')}
-					/>
-				))
-			}
 		</ul>
 	</main>
 </Layout>
