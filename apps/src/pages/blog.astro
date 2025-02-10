@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { wpquery } from "../graphql/wp";
+import Item from "../components/Item.astro";
+
+const data = await wpquery({
+	query: `
+ 	 {
+		posts{
+			nodes{
+				slug
+				excerpt
+				title
+				date
+				featuredImage {
+					node {
+						id
+						sourceUrl
+						altText
+						mediaDetails {
+							width
+							height
+						}
+					}
+				}
+			}
+ 		 }
+	 }
+ 	`,
+});
+---
+
+<Layout title="AstroとWordPressを使ったブログ記事ページ">
+	<main>
+		<h2><span class="text-gradient">ブログ記事一覧</span></h2>
+		<ul class="blog-list">
+			{
+				data.posts.nodes.map((post: any) => (
+					<li>
+						<Item
+							href={`/blog/${post.slug}`}
+							thumbnail={post.featuredImage?.node?.sourceUrl}
+							title={post.title}
+							body={post.excerpt}
+							date={post.date}
+						/>
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</Layout>
+
+<style lang="scss">
+	.blog-list {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+		margin-top: 40px;
+	}
+	.blog-list li {
+		list-style: none;
+	}
+
+</style>
